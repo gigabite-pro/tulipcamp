@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css3?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <title>Tulip Socials</title>
+</head>
+<body>
+    <nav>
+        <a href="/">
+            <div class="logo"></div>
+        </a>
+        <ul>
+            <a href="/">
+                <li>posts</li>
+            </a>
+            <a href="/notifs.html">
+                <li>notifs</li>
+            </a>
+            <a href="/profile.html">
+                <li>profile</li>
+            </a>
+            <a href="/auth/logout" class="login">
+                <li>logout</li>
+            </a>
+        </ul>
+    </nav>
+    <div class="notif-head">
+        <h1>
+            Profile
+        </h1>
+    </div>
+    <div class="profile">
+        <div class="info-box">
+            <div class="left">
+                <div class="pfp" style="background-image: url(<%=pfp%>);"></div>
+                <div class="username">
+                    <strong>@_.chintuuu._</strong> 
+                </div>
+            </div>
+            <hr style="transform: rotate(90); margin: 0; padding: 0;">
+            <div class="right">
+                <span>
+                    <strong>Name: </strong><br><%= fullname %>
+                </span>
+                <span>
+                    <strong>Email: </strong><br><%= email %>
+                </span>
+                <span>
+                    <strong>Posts: </strong><br>2
+                </span>
+                <span>
+                    <strong>Liked Posts: </strong><br>10
+                </span>
+            </div>
+        </div>
+
+        <div class="profile-posts">
+            <div class="head">
+                <h1>
+                    Your Posts
+                </h1>
+            </div>
+            <div class="main-posts">
+                <div class="profile-post"></div>
+                <div class="profile-post"></div>
+                <div class="profile-post"></div>
+                <div class="profile-post"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
