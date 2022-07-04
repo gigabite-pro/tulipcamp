@@ -9,7 +9,6 @@ router.get('/', isAuthorized, (req,res)=>{
             let pfp = doc.pfp
             let fullname = doc.name
             let email = doc.email
-            console.log(doc)
             res.render('profile', {fullname, pfp, email})
         }else{
             console.log('no docs')

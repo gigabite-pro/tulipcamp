@@ -213,11 +213,23 @@ nav .login{
     background-size: cover;
 }
 
+
 .profile{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.profile-head{
+    padding-top: 6vw;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.profile-head h1{
+    font-weight: 700;
 }
 
 .info-box{
@@ -255,11 +267,38 @@ nav .login{
     padding: 1.5vw;
 }
 
+.add-post{
+    padding-top: 2vw;
+}
+
+.add-btn{
+    padding: 1vw;
+    background-color: #FFD524;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 500;
+}
+
+.btn:hover{
+    color: white;
+}
+
+.post-btn{
+    background-color: #55185D;
+    color: white;
+}
+
+#loading{
+    display: none;
+}
+
 .profile-posts{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2vw;
+    margin-top: 1vw;
 }
 
 .profile-posts h1{
