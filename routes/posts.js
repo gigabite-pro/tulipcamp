@@ -1,9 +1,13 @@
 const router = require('express').Router()
 const { isAuthorized } = require('../config/authCheck')
 const Posts = require('../models/Posts')
+const Users = require('../models/Users')
 
 router.get('/', isAuthorized, (req,res)=>{
-    res.render('posts')
+    Posts.find()
+    .then(docs => {
+        res.render('posts', {docs})
+    }).catch(err => console.log(err))
 })
 
 router.post('/newpost', isAuthorized, (req,res) => {
@@ -13,12 +17,22 @@ router.post('/newpost', isAuthorized, (req,res) => {
     newPost = new Posts({
         'file': file,
         'caption': caption,
-        'user': req.session.user 
+        'userpfp': req.session.user.pfp
     })
 
     newPost.save()
-    .then(doc => {
-        res.redirect('/profile')
+    .then(() => {
+        Users.findById(req.session.user._id)
+        .then(doc =>{
+            let posts = doc.posts
+            posts.push(file)
+            doc.markModified('posts')
+            doc.save()
+            .then(()=>{
+                res.redirect('/profile')
+            })
+            .catch(err => console.log(err))
+        }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 })
 

@@ -7,7 +7,7 @@ const postsSchema = new mongoose.Schema({
     caption : {
         type: String,
     },
-    user: {
+    userpfp: {
         type: String,
     },
     date: {

@@ -72,7 +72,7 @@ router.get('/callback',async (req, res) => {
 
     const user = await Users.findOne({email: googleUser.email})
     if(user){
-        req.session.user = user._id
+        req.session.user = user
         res.redirect('/posts')
     }else{
         const newUser = new Users({
@@ -84,7 +84,7 @@ router.get('/callback',async (req, res) => {
         newUser.save()
         .then(
             (resp)=>{  
-                req.session.user = resp._id
+                req.session.user = resp
                 res.redirect('/posts')
             }
         )

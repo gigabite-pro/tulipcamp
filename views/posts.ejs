@@ -30,37 +30,23 @@
         </ul>
     </nav>
     <div class="posts">
-        <div class="card">
-            <div class="upper">
-                <div class="info">
-                    <div class="pfp"></div>
-                    <div class="username">@_.chintuuu._</div>
+        <% for(let i = docs.length-1; i > -1; i--) {%>
+            <div class="card">
+                <div class="upper">
+                    <div class="info">
+                        <div class="pfp" style="background-image: url('<%=docs[i].userpfp%>');"></div>
+                        <div class="username">@_.chintuuu._</div>
+                    </div>
+                    <div class="like">like</div>
                 </div>
-                <div class="like">like</div>
-            </div>
-            <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
-            <div class="lower"></div>
-            <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
-            <div class="caption">
-                "Hello this is my first post"
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="upper">
-                <div class="info">
-                    <div class="pfp"></div>
-                    <div class="username">@_.chintuuu._</div>
+                <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
+                <div class="lower" style="background-image: url('<%=docs[i].file%>');"></div>
+                <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
+                <div class="caption">
+                    <%=docs[i].caption%>
                 </div>
-                <div class="like">like</div>
             </div>
-            <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
-            <div class="lower"></div>
-            <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
-            <div class="caption">
-                "Hello this is my first post"
-            </div>
-        </div>
+        <% } %>
     </div>
 </body>
 </html>

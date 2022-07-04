@@ -144,12 +144,16 @@ nav .login{
     width: 2vw;
     height: 2vw;
     border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .lower{
     height: 25vw;
-    background: url('assets/home.svg') no-repeat center;
-    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .caption{
@@ -315,7 +319,8 @@ nav .login{
 .profile-post{
     width: 18vw;
     height: 22vw;
-    background: url('assets/home.svg') no-repeat center;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     margin-bottom: 3vw;
     margin-right: 1.5vw;

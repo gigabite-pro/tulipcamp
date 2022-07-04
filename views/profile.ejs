@@ -103,10 +103,9 @@
                 </h1>
             </div>
             <div class="main-posts">
-                <div class="profile-post"></div>
-                <div class="profile-post"></div>
-                <div class="profile-post"></div>
-                <div class="profile-post"></div>
+                <% for(let i=posts.length - 1; i > -1; i--){ %>
+                    <div class="profile-post" style="background-image: url('<%=posts[i]%>');"></div>
+                <% } %> 
             </div>
         </div>
     </div>
