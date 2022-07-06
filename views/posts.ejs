@@ -40,7 +40,7 @@
                             <div class="username">@<%=docs[i].username%></div>
                         </div>
                             <% if (user.likedPosts.includes(docs[i]._id)) { %>
-                                <a data-id = <%=docs[i]._id%> data-sender = <%=user.username%> data-senderpfp = <%=user.pfp%> data-receiver = <%=docs[i].username%>>
+                                <a>
                                     <span>
                                         <%=docs[i].likes%>
                                     </span> 

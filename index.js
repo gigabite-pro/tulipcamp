@@ -8,7 +8,7 @@ const profileRoute = require('./routes/profile');
 const app = express();
 require('dotenv').config();
 
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT || 3000
 
 //Middlewares
 app.set('view engine', 'ejs');
