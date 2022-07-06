@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+const notifsRoute = require('./routes/notifs');
 const profileRoute = require('./routes/profile');
 const app = express();
 require('dotenv').config();
@@ -47,6 +48,7 @@ app.get('/about', (req, res) => res.render('about'));
 //Routes
 app.use('/auth', authRoute);
 app.use('/posts', postRoute);
+app.use('/notifs', notifsRoute);
 app.use('/profile', profileRoute);
 
 // Starting the app

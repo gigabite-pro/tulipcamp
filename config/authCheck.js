@@ -5,5 +5,12 @@ module.exports = {
         } else {
             res.redirect("/");
         }
+    },
+    isVerified: async (req,res,next) => {
+        if(req.session.user.isVerified){
+            next()
+        }else{
+            res.redirect('/auth/verify')
+        }
     }
 }

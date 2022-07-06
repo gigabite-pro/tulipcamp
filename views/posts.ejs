@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/410f94a1ed.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css3?family=Lexend+Deca&display=swap" rel="stylesheet">
     <title>Tulip Socials</title>
 </head>
@@ -30,23 +31,80 @@
         </ul>
     </nav>
     <div class="posts">
-        <% for(let i = docs.length-1; i > -1; i--) {%>
-            <div class="card">
-                <div class="upper">
-                    <div class="info">
-                        <div class="pfp" style="background-image: url('<%=docs[i].userpfp%>');"></div>
-                        <div class="username">@_.chintuuu._</div>
+        <% if (docs.length > 0) { %>
+            <% for(let i = docs.length-1; i > -1; i--) {%>
+                <div class="card">
+                    <div class="upper">
+                        <div class="info">
+                            <div class="pfp" style="background-image: url('<%=docs[i].userpfp%>');"></div>
+                            <div class="username">@<%=docs[i].username%></div>
+                        </div>
+                            <% if (user.likedPosts.includes(docs[i]._id)) { %>
+                                <a data-id = <%=docs[i]._id%> data-sender = <%=user.username%> data-senderpfp = <%=user.pfp%> data-receiver = <%=docs[i].username%>>
+                                    <span>
+                                        <%=docs[i].likes%>
+                                    </span> 
+                                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                                </a>
+                            <% }else{ %>
+                                <a class="like" data-id = <%=docs[i]._id%> data-sender = <%=user.username%> data-senderpfp = <%=user.pfp%> data-receiver = <%=docs[i].username%>>
+                                    <span>
+                                        <%=docs[i].likes%>
+                                    </span> 
+                                    <i class="fa-regular fa-heart" id="like-btn"></i>
+                                </a>
+                            <% } %>
                     </div>
-                    <div class="like">like</div>
+                    <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
+                    <div class="lower" style="background-image: url('<%=docs[i].file%>');"></div>
+                    <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
+                    <div class="caption">
+                        <%=docs[i].caption%>
+                    </div>
                 </div>
-                <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
-                <div class="lower" style="background-image: url('<%=docs[i].file%>');"></div>
-                <hr style="height: 1px; width:100%; background-color: black; border:none; margin: 0; padding: 0;">
-                <div class="caption">
-                    <%=docs[i].caption%>
-                </div>
+            <% } %>
+        <% }else{ %>
+            <div class="no-posts">
+                <h1>No posts yet</h1>
             </div>
         <% } %>
+        
     </div>
+    <script>
+        function likePost(post,id,sender,pfp,receiver){
+                fetch(`/posts/like?id=${id}&sender=${sender}&senderpfp=${pfp}&receiver=${receiver}`, {
+                    method: 'GET'
+                }).then(async resp =>{
+                    resp = await resp.json()
+                    console.log(resp)
+                    if(resp.data){
+                        // keep it red
+                        post.style.color = 'red';
+                    }else{
+                        // remove color
+                        post.classList.remove('fa-solid');
+                        post.classList.add('fa-regular');
+                        post.style.color = 'black';
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+
+        const likes = document.querySelectorAll('.like');
+        likes.forEach(post => {
+            post.addEventListener('click', () => {
+                const id = post.getAttribute('data-id');
+                const sender = post.getAttribute('data-sender');
+                const receiver = post.getAttribute('data-receiver');
+                const senderpfp = post.getAttribute('data-senderpfp');
+
+                post.children[1].classList.remove('fa-regular');
+                post.children[1].classList.add('fa-solid');
+                post.children[1].style.color = 'red';
+                
+                likePost(post.children[1], id,  sender, senderpfp, receiver);
+            })
+        })
+    </script>
 </body>
 </html>

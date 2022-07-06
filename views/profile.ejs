@@ -38,9 +38,9 @@
     <div class="profile">
         <div class="info-box">
             <div class="left">
-                <div class="pfp" style="background-image: url(<%=pfp%>);"></div>
+                <div class="pfp" style="background-image: url('<%=pfp%>');"></div>
                 <div class="username">
-                    <strong>@_.chintuuu._</strong> 
+                    <strong><%=username%></strong> 
                 </div>
             </div>
             <hr style="transform: rotate(90); margin: 0; padding: 0; color: black; background-color: black; width: 0.2vw; opacity: 1;">
@@ -52,10 +52,10 @@
                     <strong>Email: </strong><br><%= email %>
                 </span>
                 <span>
-                    <strong>Posts: </strong><br>2
+                    <strong>Posts: </strong><br><%= posts.length %>
                 </span>
                 <span>
-                    <strong>Liked Posts: </strong><br>10
+                    <strong>Liked Posts: </strong><br><%= likedPosts.length %>
                 </span>
             </div>
         </div>
@@ -87,7 +87,7 @@
                     <p id="loading" style="padding: 1vw 0vw;">Please wait while your file is uploading...</p>
                     <input type="text" name="fileUrl" id="fileUrl" value="" hidden>
                     <div class="form-group">
-                        <input type="text" name="caption" placeholder="Caption..." class="form-control">
+                        <input type="text" name="caption" placeholder="Caption..." class="form-control" autocomplete="off">
                     </div>
                     <button type="submit" class="btn post-btn" id="postBtn" disabled>Post!</button>
                   </form>
@@ -151,7 +151,6 @@
             .then(snapshot => snapshot.ref.getDownloadURL())
             .then(url => {
                 fileInput.value = url
-                console.log(fileInput.value);
                 if(fileInput.value != ''){
                         pBtn.disabled = false;
                     }else{

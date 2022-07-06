@@ -5,6 +5,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    username: {
+        type: String,
+    },
     email : {
         type: String,
         required: true,
@@ -13,7 +16,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
     posts: {
+        type: Array,
+    },
+    notifs: {
+        type: Array,
+    },
+    likedPosts: {
         type: Array,
     },
     date: {

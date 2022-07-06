@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css3?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <title>Tulip Socials</title>
+</head>
+<body>
+    <div class="verify">
+        <div class="verify-head">
+            <h1>
+                Complete Your Profile
+            </h1>
+        </div>
+        <div class="verify-box">
+            <form action="/auth/verifyuser" method="post">
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control" autocomplete="off" placeholder="Set a username">
+                </div>
+                <p id="msg"></p>
+                <button type="button" class="btn post-btn" onclick="checkUser()">Check Availability</button>
+                <button type="submit" class="btn post-btn" id="submitBtn" disabled>Let's go!</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script>
+        function checkUser(){
+            const username = document.getElementById('username').value
+            const msg = document.getElementById('msg')
+            const submitBtn = document.getElementById('submitBtn')
+
+            fetch(`/auth/checkuser?user=${username}`, {method: 'GET'})
+            .then(async resp => {
+                resp = await resp.json()
+                console.log(resp)
+                if(resp.data == true){
+                    msg.innerHTML = ''
+                    msg.innerHTML = 'Not Available'
+                    msg.style.color = 'red'
+                    submitBtn.disabled = true
+                }else{
+                    msg.innerHTML = ''
+                    msg.innerHTML = 'Available'
+                    msg.style.color = 'green'
+                    submitBtn.disabled = false
+                }
+            })
+            .catch(err => console.log(err))
+        }
+    </script>
+</body>
+</html>

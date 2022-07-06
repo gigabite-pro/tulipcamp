@@ -2,7 +2,6 @@ const router = require('express').Router()
 const axios = require('axios')
 const urlParse = require('url-parse');
 const qs = require('query-string')
-const session = require("express-session");
 const Users = require('../models/Users')
 require('dotenv').config()
 
@@ -73,7 +72,11 @@ router.get('/callback',async (req, res) => {
     const user = await Users.findOne({email: googleUser.email})
     if(user){
         req.session.user = user
-        res.redirect('/posts')
+        if(user.isVerified){
+            res.redirect('/posts')
+        }else{
+            res.redirect('/auth/verify')
+        }
     }else{
         const newUser = new Users({
             name: googleUser.name,
@@ -85,11 +88,51 @@ router.get('/callback',async (req, res) => {
         .then(
             (resp)=>{  
                 req.session.user = resp
-                res.redirect('/posts')
+                res.redirect('/auth/verify')
             }
         )
         .catch(err => console.log(err))   
     }
+})
+
+router.get('/verify', (req,res)=>{
+    let user = req.session.user
+    res.render('verify', {user})
+})
+
+router.get('/checkuser', (req,res)=>{
+    let user = req.query.user
+
+    Users.findOne({username: user})
+    .then(doc => {
+        if(doc){
+            res.json({
+                data : true
+            })
+        }else{
+            res.json({
+                data : false
+            })
+        }
+    })
+    .catch(err => console.log(err))
+})
+
+router.post('/verifyuser', (req,res)=>{
+    const username = req.body.username
+
+    Users.findById(req.session.user._id)
+    .then(doc => {
+        doc.isVerified = true
+        doc.username = username
+        doc.save()
+        .then((user)=>{
+            req.session.user = user
+            res.redirect('/profile')
+        })
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
 })
 
 router.get('/logout', (req,res)=>{

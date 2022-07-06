@@ -35,61 +35,27 @@
         </h1>
     </div>
     <div class="notifs">
-        <div class="notif-card">
-            <div class="left">
-                <div class="pfp">
-
+        <% if (notifs.length > 0) { %>
+            <% for(let i=notifs.length-1; i > -1; i--){ %>
+                <div class="notif-card">
+                    <div class="left">
+                        <div class="pfp" style="background-image: url('<%=notifs[i][1]%>');"></div>
+                        <div class="username">
+                           <strong>@<%=notifs[i][0]%></strong> liked your post. 
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="liked-img" style="background-image: url('<%=posts[i]%>');"></div>
+                    </div>
                 </div>
-                <div class="username">
-                   <strong>@anshul</strong> liked your post. 
-                </div>
+            <% } %>
+        <% }else{ %>
+            <div class="no-notifs">
+                <h1>
+                    No Notifications
+                </h1>
             </div>
-            <div class="right">
-                <div class="liked-img"></div>
-            </div>
-        </div>
-
-        <div class="notif-card">
-            <div class="left">
-                <div class="pfp">
-
-                </div>
-                <div class="username">
-                   <strong>@anshul</strong> liked your post. 
-                </div>
-            </div>
-            <div class="right">
-                <div class="liked-img"></div>
-            </div>
-        </div>
-
-        <div class="notif-card">
-            <div class="left">
-                <div class="pfp">
-
-                </div>
-                <div class="username">
-                   <strong>@anshul</strong> liked your post. 
-                </div>
-            </div>
-            <div class="right">
-                <div class="liked-img"></div>
-            </div>
-        </div>
-
-        <div class="notif-card">
-            <div class="left">
-                <div class="pfp">
-
-                </div>
-                <div class="username">
-                   <strong>@anshul</strong> liked your post. 
-                </div>
-            </div>
-            <div class="right">
-                <div class="liked-img"></div>
-            </div>
-        </div>
+        <% } %>
     </div>
 </body>
 </html>

@@ -46,6 +46,28 @@ nav .login{
     padding: 0.6vw 1vw;
 }
 
+.verify{
+    width: 100vw;
+    height: 100vh;
+    background-color: #55185D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.verify-box{
+    width: 30vw;
+    height: 30vh;
+    background-color: #FFD524;
+    border-radius: 10px;
+    padding: 2vw;
+}
+
+.verify-head{
+    color: white;
+}
+
 .main{
     display: flex;
     justify-content: space-around;
@@ -113,6 +135,10 @@ nav .login{
     padding-top: 6vw;
 }
 
+.no-posts{
+    color: #FFD524;
+}
+
 .card{
     width: 28vw;
     height: 35vw;
@@ -122,6 +148,15 @@ nav .login{
     /* margin: auto; */
     margin-bottom: 2vw;
     flex-direction: column;
+}
+
+.fa-heart{
+    font-size: 1.5vw;
+    padding-right: 1vw;
+}
+
+a:hover{
+    cursor: pointer;
 }
 
 .upper{
@@ -147,6 +182,10 @@ nav .login{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.like span{
+    font-size: 1.2vw;
 }
 
 .lower{
@@ -178,6 +217,10 @@ nav .login{
     align-items: center;
 }
 
+.no-notifs{
+    color: #FFD524;
+}
+
 .notif-card{
     width: 25vw;
     height: 5vw;
@@ -199,7 +242,9 @@ nav .login{
     width: 2vw;
     height: 2vw;
     border-radius: 50%;
-    background: url('/assets/logo_cropped.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .notif-card .username{
@@ -213,7 +258,8 @@ nav .login{
 .liked-img{
     width: 3vw;
     height: 4.5vw;
-    background: url('assets/home.svg') no-repeat center;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
 }
 

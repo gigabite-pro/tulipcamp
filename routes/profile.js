@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const { isAuthorized } = require('../config/authCheck')
+const { isAuthorized, isVerified } = require('../config/authCheck')
 const Users = require('../models/Users')
 
-router.get('/', isAuthorized, (req,res)=>{ 
+router.get('/', isAuthorized, isVerified, (req,res)=>{ 
     Users.findById(req.session.user)
     .then((doc)=>{
         if(doc){
@@ -10,7 +10,9 @@ router.get('/', isAuthorized, (req,res)=>{
             let fullname = doc.name
             let email = doc.email
             let posts = doc.posts
-            res.render('profile', {fullname, pfp, email, posts})
+            let username = doc.username
+            let likedPosts = doc.likedPosts
+            res.render('profile', {fullname, pfp, email, posts, username, likedPosts})
         }else{
             console.log('no docs')
         }
