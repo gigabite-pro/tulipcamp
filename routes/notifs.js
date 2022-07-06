@@ -9,16 +9,21 @@ router.get('/', isAuthorized, isVerified, (req,res)=>{
         if(doc){
             let notifs = doc.notifs
             let posts = []
-            for(let i = 0; i < notifs.length; i++){
-                Posts.findById(notifs[i][2])
-                .then(post => {
-                    posts.push(post.file)
-                    if(posts.length === notifs.length){
-                        res.render('notifs', {notifs,posts})
-                    }
-                })
-                .catch(err => console.log(err))
+            if(notifs.length > 0){
+                for(let i = 0; i < notifs.length; i++){
+                    Posts.findById(notifs[i][2])
+                    .then(post => {
+                        posts.push(post.file)
+                        if(posts.length === notifs.length){
+                            res.render('notifs', {notifs,posts})
+                        }
+                    })
+                    .catch(err => console.log(err))
+                }
+            }else{
+                res.render('notifs', {notifs,posts})
             }
+
         }
     })
     .catch(err => console.log(err))

@@ -138,7 +138,8 @@
         firebase.initializeApp(firebaseConfig);
 
         function uploadFile(){
-            loading.style.display = 'inline';
+            loading.style.display = 'block';
+            loading.style.marginBottom = '1vw';
 
             const ref = firebase.storage().ref();
             const file = document.querySelector('#file').files[0]

@@ -40,7 +40,7 @@
                             <div class="username">@<%=docs[i].username%></div>
                         </div>
                             <% if (user.likedPosts.includes(docs[i]._id)) { %>
-                                <a>
+                                <a aria-disabled="true">
                                     <span>
                                         <%=docs[i].likes%>
                                     </span> 
@@ -79,32 +79,43 @@
                     console.log(resp)
                     if(resp.data){
                         // keep it red
-                        post.style.color = 'red';
+                        post.children[1].style.color = 'red';
+                        post.style.pointerEvents = 'none';
                     }else{
-                        // remove color
-                        post.classList.remove('fa-solid');
-                        post.classList.add('fa-regular');
-                        post.style.color = 'black';
+                        // remove color and decrement
+                        post.children[1].classList.remove('fa-solid');
+                        post.children[1].classList.add('fa-regular');
+                        post.children[1].style.color = 'black';
+                        post.children[0].innerHTML = parseInt(post.children[0].innerHTML) - 1;
                     }
                 })
                 .catch(err => console.log(err))
             }
 
-        const likes = document.querySelectorAll('.like');
-        likes.forEach(post => {
-            post.addEventListener('click', () => {
-                const id = post.getAttribute('data-id');
-                const sender = post.getAttribute('data-sender');
-                const receiver = post.getAttribute('data-receiver');
-                const senderpfp = post.getAttribute('data-senderpfp');
+        function listen(){
+            const likes = document.querySelectorAll('.like');
+            console.log(likes)
+            likes.forEach(post => {
+                post.addEventListener('click', () => {
+                    const id = post.getAttribute('data-id');
+                    const sender = post.getAttribute('data-sender');
+                    const receiver = post.getAttribute('data-receiver');
+                    const senderpfp = post.getAttribute('data-senderpfp');
 
-                post.children[1].classList.remove('fa-regular');
-                post.children[1].classList.add('fa-solid');
-                post.children[1].style.color = 'red';
-                
-                likePost(post.children[1], id,  sender, senderpfp, receiver);
+                    // color change and increment
+                    post.children[1].classList.remove('fa-regular');
+                    post.children[1].classList.add('fa-solid');
+                    post.children[1].style.color = 'red';
+                    post.children[0].innerHTML = parseInt(post.children[0].innerHTML) + 1;
+                    
+                    likePost(post, id,  sender, senderpfp, receiver);
+                })
             })
-        })
+        }
+        
+        window.onload = ()=>{
+            listen();
+        }
     </script>
 </body>
 </html>

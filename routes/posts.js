@@ -75,17 +75,47 @@ router.get('/like', isAuthorized, isVerified, (req,res) => {
                                 data: true
                             })
                         })
-                        .catch(err => console.log(err))
+                        .catch(err => {
+                            console.log(err)
+                            res.json({
+                                data: false
+                            })
+                        })
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        console.log(err)
+                        res.json({
+                            data: false
+                        })
+                    })
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                    res.json({
+                        data: false
+                    })
+                })
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                res.json({
+                    data: false
+                })
+            })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            res.json({
+                data: false
+            })
+        })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err)
+        res.json({
+            data: false
+        })
+    })
 })
 
 module.exports = router
